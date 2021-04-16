@@ -6,9 +6,7 @@ RUN apt-get update -y && apt-get install git -y
 
 RUN conda create -n open-mmlab python=3.7 -y
 
-RUN source activate
-
-RUN conda activate open-mmlab
+RUN source activate open-mmlab
 
 RUN conda install pytorch==1.2.0 torchvision==0.4.0 cudatoolkit=10.0 -c pytorch
 
