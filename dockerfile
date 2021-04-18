@@ -1,19 +1,13 @@
-FROM conda/miniconda3
+FROM pytorch/pytorch:1.2-cuda10.0-cudnn7-runtime
 
 WORKDIR /
 
 RUN apt-get update -y && apt-get install git -y
 
-RUN conda create -n open-mmlab python=3.7 -y
+RUN apt-get install libgl1-mesa-glx -y
 
-RUN /usr/local/envs/open-mmlab/bin/pip install pytorch==1.2.0 torchvision==0.4.0 cudatoolkit=10.0 -c pytorch
+RUN git clone https://github.com/yysijie/st-gcn.git
 
-RUN git clone https://github.com/open-mmlab/mmskeleton.git
+RUN pip install -r /st-gcn/requirements.txt
 
-WORKDIR mmskeleton
 
-RUN python setup.py develop
-
-WORKDIR mmskeleton/ops/nms/
-
-RUN python setup_linux.py develop
